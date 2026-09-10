@@ -1,0 +1,22 @@
+digraph AuthGuard {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.35", ranksep="0.55"];
+  node [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=12, color="#334155", penwidth=1.3, margin="0.18,0.12"];
+  edge [fontname="DejaVu Sans", fontsize=10, color="#475569", arrowsize=0.75];
+
+  source [label="External content\nDocument | Webpage | Email | Shared data", fillcolor="#fee2e2", color="#b91c1c"];
+  plant [label="Plant session\nRead source + save preference", fillcolor="#fef3c7", color="#b45309"];
+  memory [label="Memory layer\nHMAC-SHA256 tag + origin", fillcolor="#dbeafe", color="#1d4ed8"];
+  policy [label="Read-time policy\nVerify tag + trusted-origin filter", fillcolor="#dcfce7", color="#15803d"];
+  planner [label="Planner\nBuild Authorization Graph", fillcolor="#e0e7ff", color="#4338ca"];
+  executor [label="Executor\nSelect and execute tool calls", fillcolor="#ede9fe", color="#6d28d9"];
+  checker [label="Graph Alignment Checker\nTool + effect + target", fillcolor="#cffafe", color="#0e7490"];
+  env [label="Simulated environment\nEmail | Calendar | Finance | Files", fillcolor="#f1f5f9", color="#475569"];
+
+  source -> plant [label="untrusted text"];
+  plant -> memory [label="write with provenance"];
+  memory -> policy [label="stored entries"];
+  policy -> planner [label="trusted context only"];
+  planner -> executor [label="Authorization Graph"];
+  executor -> checker [label="candidate action"];
+  checker -> env [label="allow or block"];
+}

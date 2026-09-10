@@ -1,0 +1,3 @@
+condition,successful_attacks,total_attacks,asr,successful_benign_tasks,total_benign_tasks,utility
+Stage 2 baseline,4,4,1.0,1,1,1.0
+Stage 3 provenance defense,0,4,0.0,1,1,1.0
